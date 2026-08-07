@@ -152,3 +152,39 @@ GROUP BY DATEDIFF(ENDDATE,STARTDATE) HAVING COUNT(*)>=2;
 SELECT DATEDIFF(ENDDATE,STARTDATE) AS DURATION,COUNT(*) FROM PROJECTS
 WHERE EMPLOYEEID>1004
 GROUP BY DATEDIFF(ENDDATE,STARTDATE) HAVING COUNT(*)>=2;
+USE EMPOLYEE;
+use employee;
+create table voter_list
+(voter_id int ,
+names varchar(30),
+age int check(age>=18) );
+desc voter_list;
+select * from voter_list;
+insert into voter_list values
+(20067, "anuja patil",18);
+select * from projects where employeeid is null;
+select * from projects where employeeid is not null;
+create table voter_list_2
+(voter_id int ,
+names varchar(30),
+age int check(age>=18),
+email_id varchar(30) default "dummy@gmail.com" );
+desc voter_list_2;
+select * from voter_list_2;
+insert into voter_list_2 values
+(20067, "anuja patil",18, "anujaP@gmail.com"),
+(20068, "kamlesh joshi",44, default);
+show tables;
+select *, concat(fullname,"-",employeeid) as specific_code from emp;
+select fullname, lower(fullname) from emp;
+select fullname, upper(fullname) from emp;
+select fullname, replace(fullname,"Mohanty","kulkarni") as new_name from emp;
+UPDATE EMP SET FULLNAME = "SAMBIT KULKARNI" WHERE EMPLOYEEID = 1008;
+UPDATE EMP SET FULLNAME = "ANURAG KULKARNI" WHERE EMPLOYEEID = 1006;
+SELECT * FROM EMP;
+SELECT LENGTH(FULLNAME) FROM EMP;
+SELECT LENGTH(FULLNAME) FROM EMP WHERE EMPLOYEEID = 1008;
+SELECT FULLNAME, LENGTH(FULLNAME) FROM EMP WHERE EMPLOYEEID = 1008;
+SELECT SUBSTRING("MARY SMITH",2,3);
+SELECT FULLNAME, SUBSTRING(FULLNAME, 2,3) AS PARTIALL,
+LENGTH(SUBSTRING(FULLNAME,2,3)) AS LENGTH FROM EMP; 
