@@ -187,4 +187,53 @@ SELECT LENGTH(FULLNAME) FROM EMP WHERE EMPLOYEEID = 1008;
 SELECT FULLNAME, LENGTH(FULLNAME) FROM EMP WHERE EMPLOYEEID = 1008;
 SELECT SUBSTRING("MARY SMITH",2,3);
 SELECT FULLNAME, SUBSTRING(FULLNAME, 2,3) AS PARTIALL,
-LENGTH(SUBSTRING(FULLNAME,2,3)) AS LENGTH FROM EMP; 
+LENGTH(SUBSTRING(FULLNAME,2,3)) AS LENGTH FROM EMP;
+use employee;
+create table trim_ex
+(name varchar(60));
+insert into trim_ex
+values
+("sunil"),
+("  anjan"),
+("kunal  ");
+select * ,length(name),
+length(rtrim(name)) as right_trimmed,
+length(ltrim(name)) as left_trimmed,
+length(trim(name)) as both_trimmed from trim_ex;
+select fullname,reverse(fullname) from emp;
+select reverse("siddhi");
+select abs(-1234);
+select abs(+5798);
+select datediff(enddate,startdate) as duration from projects;
+select datediff(startdate,enddate) as duration from projects;
+select abs(datediff(startdate,enddate)) as duration from projects;
+select mod(12,5);
+select floor(14.9);
+select ceil(14.9);
+select truncate(14.2875657,3);
+select truncate(1456.2875657,-1);
+select exp(2);
+select power(4,2);
+select pow(13,2);
+select sqrt(169);
+select curdate();
+select now();
+select sysdate();
+select last_day(now());
+select last_day("2024-02-22");
+select date_format(now(),"%b");
+select date_format(now(),"%m");
+select date_format(now(),"%y");
+select date_format(now(),"%Y");
+select date_format(now(),"%a %D %b");
+select date_format("2005-04--04","%D-%M %Y,%W") AS DATE;
+select ABS(dateDIFF("2005-04--04",NOW()));
+select dateDIFF(NOW(),"2005-04--04") AS DAYS;
+SELECT PROJECTNAME,DATEDIFF(ENDDATE,STARTDATE) AS DURATION FROM PROJECTS;
+SELECT MONTH(NOW());
+SELECT YEAR(NOW());
+SELECT AVG(SALARY) FROM EMP WHERE DEPT = "IT";
+SELECT COUNT(DEPT) FROM EMP;
+SELECT MAX(SALARY) FROM EMP WHERE GENDER = "MALE";
+SELECT MIN(SALARY) FROM EMP WHERE GENDER = "MALE";
+
