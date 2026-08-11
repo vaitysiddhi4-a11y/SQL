@@ -236,4 +236,35 @@ SELECT AVG(SALARY) FROM EMP WHERE DEPT = "IT";
 SELECT COUNT(DEPT) FROM EMP;
 SELECT MAX(SALARY) FROM EMP WHERE GENDER = "MALE";
 SELECT MIN(SALARY) FROM EMP WHERE GENDER = "MALE";
-
+use employee;
+show tables;
+select emp.employeeid, fullname, city from emp
+left join address
+on emp.employeeid = address.employeeid;
+select projects. employeeid, projectname, state from projects
+left join address
+on projects.employeeid = address.employeeid;
+select projects. employeeid, projectname, state from projects
+join address
+on projects.employeeid = address.employeeid;
+select emp.employeeid, fullname, city from address
+right join emp
+on emp.employeeid = address.employeeid;
+select emp.employeeid, fullname, city from address
+right join emp
+on emp.employeeid = address.employeeid;
+select emp.employeeid, fullname, projectname, datediff(enddate,startdate) as duration  from emp
+left join projects
+on emp.employeeid = projects.employeeid;
+select fullname, projectname, state from emp as e
+left join projects as p
+on e.employeeid = p. employeeid
+left join address as a
+on a.employeeid = e.employeeid;
+select e.employeeid, fullname, projectname from projects
+left join emp as e
+on e.employeeid = p. employeeid
+union 
+select e.employeeid, fullname, projectname 
+right join projects as p
+on e.employeeid = p. employeeid;
