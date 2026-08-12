@@ -261,10 +261,30 @@ left join projects as p
 on e.employeeid = p. employeeid
 left join address as a
 on a.employeeid = e.employeeid;
-select e.employeeid, fullname, projectname from projects
-left join emp as e
-on e.employeeid = p. employeeid
-union 
-select e.employeeid, fullname, projectname 
+use employee;
+select emp.employeeid, fullname, projectname, city, datediff(enddate,startdate) as duration, dept, salary, gender, country from emp 
+left join projects as p
+on emp.employeeid = p.employeeid
+left join address as a
+on emp.employeeid = a.employeeid;
+use employee;
+select e.employeeid, fullname, projectname from emp as e
+left join projects as p
+on e.employeeid = p.employeeid
+union
+select e.employeeid, fullname, projectname from emp as e
 right join projects as p
-on e.employeeid = p. employeeid;
+on e.employeeid = p.employeeid;
+
+select fullname, dept from emp
+where dept = (select dept from emp where employeeid = 1001);
+select fullname, age from emp
+where age = (select age from emp where employeeid = 1003);
+select projectname,datediff(enddate,startdate) as duration from projects
+where datediff(enddate,startdate) = (select datediff(enddate,startdate)  from projects where employeeid = 1004);
+select max(salary) from emp;
+select fullname, salary from emp
+where salary = (select max(salary) from emp );
+select * from emp;
+select fullname, salary from emp
+where salary =(select max(salary) from emp where salary < (select max(salary) from emp) );
