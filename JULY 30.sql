@@ -236,6 +236,8 @@ SELECT AVG(SALARY) FROM EMP WHERE DEPT = "IT";
 SELECT COUNT(DEPT) FROM EMP;
 SELECT MAX(SALARY) FROM EMP WHERE GENDER = "MALE";
 SELECT MIN(SALARY) FROM EMP WHERE GENDER = "MALE";
+
+-------------joins-----------
 use employee;
 show tables;
 select emp.employeeid, fullname, city from emp
@@ -276,6 +278,7 @@ select e.employeeid, fullname, projectname from emp as e
 right join projects as p
 on e.employeeid = p.employeeid;
 
+------------subqueries (singles)--------------
 select fullname, dept from emp
 where dept = (select dept from emp where employeeid = 1001);
 select fullname, age from emp
@@ -288,3 +291,27 @@ where salary = (select max(salary) from emp );
 select * from emp;
 select fullname, salary from emp
 where salary =(select max(salary) from emp where salary < (select max(salary) from emp) );
+use employee;
+select * from emp;
+
+-------------subqueries(multiple)---------------
+select salary from emp where fullname = "john doe" or fullname = "james brown";
+select fullname, salary from emp
+where salary in (select salary from emp where fullname = "john doe" or fullname = "james brown");
+select fullname, salary from emp
+where salary in (select salary from emp where fullname = "john doe" or fullname = "james brown")
+and fullname not in ("john doe" ,"james brown");
+select * from emp
+where age<any (select age from emp where fullname in ("anurag kulkarni","mary smith"));
+select * from emp
+where 
+age < (select age from emp where fullname = "anurag kulkarni")
+or 
+age < (select age from emp where fullname = "mary smith");
+select * from emp
+where age< all (select age from emp where fullname in ("anurag kulkarni","mary smith"));
+select * from emp
+where 
+age < (select age from emp where fullname = "anurag kulkarni")
+and
+age < (select age from emp where fullname = "mary smith");
