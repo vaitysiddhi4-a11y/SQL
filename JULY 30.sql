@@ -315,3 +315,14 @@ where
 age < (select age from emp where fullname = "anurag kulkarni")
 and
 age < (select age from emp where fullname = "mary smith");
+use employee;
+update table emp change column dept varchar(37);
+ALTER TABLE EMP MODIFY dept VARCHAR(37) ;
+desc emp;
+update  emp set salary = salary+10000;
+select * from emp;
+create view my_join as
+select  e.employeeid, fullname, projectname from emp as e
+left join projects as p
+on e.employeeid = p.employeeid;
+select * from my_join;
