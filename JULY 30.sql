@@ -326,3 +326,63 @@ select  e.employeeid, fullname, projectname from emp as e
 left join projects as p
 on e.employeeid = p.employeeid;
 select * from my_join;
+
+---------case----------
+use employee;
+select employeeid, fullname,
+case when age>26 then "senior"
+else "junior"
+end as seniority
+from emp;
+select employeeid, fullname,
+case when salary > 60000 then "highly_paid"
+else "under_paid"
+end as salary_remarks
+from emp;
+update emp set salary = case dept
+when "it" then salary + (salary * 0.5)
+when "hr" then salary + (salary * 0.4)
+else salary + (salary * 0.3)
+end ;
+select * from emp;
+create database DB_FK;
+USE DB_FK;
+CREATE TABLE Employee (
+    ID INT PRIMARY KEY,
+    Name VARCHAR(100) NOT NULL,
+    Age INT
+);CREATE TABLE projects (
+    Project_ID INT PRIMARY KEY,
+    Project_Name VARCHAR(100) NOT NULL,
+    Employee_ID INT,
+-- Defining Foreign Key and Cascading Behavior 
+FOREIGN KEY (Employee_ID) 
+REFERENCES Employee(ID) 
+ON UPDATE CASCADE 
+ON DELETE CASCADE ); 
+
+INSERT INTO EMPLOYEE VALUES
+(101, "GRISHMA", 22),
+(104, "SIDDHI" , 22);
+INSERT INTO projects (Project_ID, Project_Name, Employee_ID) VALUES
+(1, 'Website Redesign', 101),
+(2, 'Cloud Migration', 101),
+(3, 'Mobile App', 102);
+SELECT * FROM EMPLOYEE;
+SELECT * FROM PROJECTS;
+
+-- ON UPDATE CASCADE EXAMPLE----------
+UPDATE Employee SET ID = 105 WHERE ID = 101;
+-- ON DELETE CASCADE EXAMPLE----------
+DELETE FROM Employee WHERE ID = 104;
+DELETE FROM Employee WHERE ID = 102;
+
+ 
+ 
+
+
+
+
+
+
+
