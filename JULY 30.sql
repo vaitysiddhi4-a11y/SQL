@@ -376,13 +376,46 @@ UPDATE Employee SET ID = 105 WHERE ID = 101;
 -- ON DELETE CASCADE EXAMPLE----------
 DELETE FROM Employee WHERE ID = 104;
 DELETE FROM Employee WHERE ID = 102;
+use employee;
 
- 
- 
-
-
-
-
-
-
-
+--------window--------
+use employee;
+select employeeid, fullname, dept, gender, salary,
+row_number() over (partition by gender)
+as rankindepartment from emp;
+ select employeeid, fullname, dept, gender, salary,
+rank() over (order by salary desc)
+as overallsalaryrank from emp;
+ select employeeid, fullname, dept, gender, salary,
+dense_rank() over (order by salary desc)
+as overallsalaryrank from emp;
+select employeeid, fullname, dept, gender, salary,
+sum(salary) over (partition by dept)
+as department_wise_totalsalary from emp;
+select employeeid, fullname, dept, gender, salary,
+max(salary) over (partition by dept)
+as departmentaveragesalary from emp;
+select employeeid, fullname, dept, gender, salary,
+max(salary) over (partition by dept)
+as departmentaveragesalary from emp
+where salary <(select max(salary) from emp);
+select employeeid, fullname, dept, gender, salary,
+count(*) over (partition by dept)
+as department_count from emp;
+select employeeid, fullname, dept, gender, salary,
+lag(salary,1) over (order by employeeid)
+as 1st_youngers_sal from emp;
+select employeeid, fullname, dept, gender, salary,
+lead(salary,1) over (order by employeeid)
+as 1st_youngers_sal from emp;
+select employeeid, fullname, dept, gender, salary,
+lag(salary,1) over (order by employeeid) as 1st_youngers_sal,
+(salary - lag (salary,1) over (order by employeeid)) as differences from emp;
+select employeeid, fullname, gender, age,
+avg(age) over (partition by  gender) as gender_wise_age
+from emp;
+select * from emp;
+select gender, avg(age) from emp group by gender;
+select employeeid, fullname, gender, age, dept,
+avg(age) over (partition by  dept) as dept_wise_age
+from emp;
