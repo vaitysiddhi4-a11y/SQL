@@ -419,3 +419,4 @@ select gender, avg(age) from emp group by gender;
 select employeeid, fullname, gender, age, dept,
 avg(age) over (partition by  dept) as dept_wise_age
 from emp;
+use employee;
